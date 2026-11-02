@@ -1,18 +1,11 @@
 package com.example.curso.webapp.springbootweb.controllers;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-
-import com.example.curso.webapp.springbootweb.models.User;
 import com.example.curso.webapp.springbootweb.models.dto.ParamDto;
-import com.example.curso.webapp.springbootweb.models.dto.UserDto;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.RequestParam;
