@@ -7,6 +7,9 @@ import java.util.Map;
 import com.example.curso.webapp.springbootweb.models.User;
 import com.example.curso.webapp.springbootweb.models.dto.ParamDto;
 import com.example.curso.webapp.springbootweb.models.dto.UserDto;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +35,15 @@ public ParamDto getMethodName(
     ParamDto paramDto = new ParamDto();
     paramDto.setMessage(message);
     paramDto.setCode(code);
+    return paramDto;
+}
+
+@GetMapping("/request")
+public ParamDto request(HttpServletRequest request){
+    ParamDto paramDto = new ParamDto();
+    paramDto.setMessage(request.getParameter("message"));
+    String code = request.getParameter("code");
+    paramDto.setCode(code != null ? Integer.parseInt(code) : null);
     return paramDto;
 }
 
