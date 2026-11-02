@@ -10,10 +10,12 @@ import com.example.curso.webapp.springbootweb.models.dto.UserDto;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -40,10 +42,24 @@ public ParamDto getMethodName(
 
 @GetMapping("/request")
 public ParamDto request(HttpServletRequest request){
+    String strCode = request.getParameter("code");
+    String message = request.getParameter("message");
+    
+    int code = 0;
+    if( strCode != null){
+        try{
+            code= Integer.parseInt(strCode);
+        }catch(NumberFormatException e){
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "The parameter 'code' must be a number", e
+            );
+        }
+    }
     ParamDto paramDto = new ParamDto();
-    paramDto.setMessage(request.getParameter("message"));
-    String code = request.getParameter("code");
-    paramDto.setCode(code != null ? Integer.parseInt(code) : null);
+    paramDto.setMessage(message);
+    paramDto.setCode(code);
+    
     return paramDto;
 }
 
